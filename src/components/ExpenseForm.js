@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { supabase } from '../supabaseClient'
 
 function ExpenseForm({ onAdd }) {
-  const [category, setCategory] = useState('')
+  const [big_category_id, setCategory] = useState('')
   const [amount, setAmount] = useState('')
   const [date, setDate] = useState('')
 
@@ -12,7 +12,7 @@ function ExpenseForm({ onAdd }) {
 
     const { error } = await supabase
       .from('expenses')
-      .insert([{ category, amount, date }])
+      .insert([{ big_category_id, amount, date }])
 
     if (error) console.error(error)
     else {
@@ -26,7 +26,7 @@ function ExpenseForm({ onAdd }) {
   return (
     <form onSubmit={addExpense}>
       <input value={date} onChange={e => setDate(e.target.value)} placeholder="日付" type="date" />
-      <input value={category} onChange={e => setCategory(e.target.value)} placeholder="カテゴリ" />
+      <input value={big_category_id} onChange={e => setCategory(e.target.value)} placeholder="カテゴリ" />
       <input value={amount} onChange={e => setAmount(e.target.value)} placeholder="金額" type="number" />
       <button type="submit">追加</button>
     </form>
