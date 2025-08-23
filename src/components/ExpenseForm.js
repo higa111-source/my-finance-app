@@ -1,4 +1,3 @@
-// src/components/ExpenseForm.js
 import { useState } from 'react'
 import { supabase } from '../supabaseClient'
 

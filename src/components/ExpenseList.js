@@ -2,12 +2,12 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../supabaseClient'
 
-function ExpenseList() {
+function ExpenseList({ reload }) {
   const [expenses, setExpenses] = useState([])
 
   useEffect(() => {
     fetchExpenses()
-  }, [])
+  }, [reload]) // ← reload が変わるたびに再取得
 
   const fetchExpenses = async () => {
     let { data, error } = await supabase
@@ -35,7 +35,7 @@ function ExpenseList() {
       <ul>
         {expenses.map(exp => (
           <li key={exp.id}>
-            {exp.date} - {exp.category} - {exp.amount}円
+            {exp.date} - {exp.big_category_id} - {exp.amount}円
             <button onClick={() => deleteExpense(exp.id)}>削除</button>
           </li>
         ))}
